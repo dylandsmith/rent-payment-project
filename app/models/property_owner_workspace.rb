@@ -1,0 +1,2 @@
+class PropertyOwnerWorkspace < ApplicationRecord
+end
