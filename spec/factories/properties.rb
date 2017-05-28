@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :property do
-    property_title "MyString"
-    address "MyString"
-    number_of_units 1
+    title "MyString"
+    utilizing_property_id 1
+    utilizing_property_type "MyString"
   end
 end

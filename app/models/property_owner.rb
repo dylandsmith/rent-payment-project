@@ -1,2 +1,2 @@
-class PropertyOwner < ApplicationRecord
+class PropertyOwner < User
 end
