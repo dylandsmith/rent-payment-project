@@ -1,45 +1,19 @@
 <h1>Hello Users</h1>
 
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% for message in @user.errors.full_messages %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  <p>
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p class="button"><%= f.submit %></p>
-<% end %>
-
 <ul>
    <% @users.each do |user| %>
-   <li><%= user.first_name %></li>
+   <li><%= user.email %></li>
    <% end %>
 </ul>
 
 <ul>
    <% @property_owners.each do |property_owner| %>
-   <li><%= property_owner.last_name %></li>
+   <li><%= property_owner.email %></li>
    <% end %>
 </ul>
 
 <ul>
    <% @tenants.each do |tenant| %>
-   <li><%= tenant.last_name %></li>
+   <li><%= tenant.email %></li>
    <% end %>
 </ul>

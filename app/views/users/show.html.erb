@@ -1,0 +1,6 @@
+
+<% if @set_user.type == 'PropertyOwner' %>
+	<%= render 'show_property_owner' %>
+<% else %>
+	<%= render 'show_tenant' %>
+<% end %>

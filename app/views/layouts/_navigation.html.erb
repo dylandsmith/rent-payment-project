@@ -1,7 +1,14 @@
-   <% if current_user %>
-      Logged in as <%= current_user.email %><br>
-      You are a <%= current_user.type %>
-      <%= link_to "Log Out", user_logged_out_path %>
-   <% else %>
-      <%= link_to "Sign up", new_user_sign_up_path %>
-   <% end %>
+<style>
+	.sub_nav
+	{
+		float: right;
+	}
+</style>
+<div class="container">
+<% if current_user %>
+	<%= link_to "Log Out", user_logged_out_path, :class => "sub_nav" %>
+<% else %>
+	<%= link_to "Sign up", new_user_sign_up_path %>
+<% end %>
+</div>
+<div style="clear: both"></div>

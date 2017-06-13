@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519180605) do
+ActiveRecord::Schema.define(version: 20170605183925) do
 
   create_table "properties", force: :cascade do |t|
     t.string   "title"
@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(version: 20170519180605) do
     t.integer  "utilizes_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.string   "st_add"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
     t.index ["utilizes_type", "utilizes_id"], name: "index_properties_on_utilizes_type_and_utilizes_id"
     t.index [nil], name: "index_properties_on_utilizing_property_id"
   end
@@ -30,6 +34,20 @@ ActiveRecord::Schema.define(version: 20170519180605) do
   create_table "resource_lists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "units", force: :cascade do |t|
+    t.string   "address2"
+    t.integer  "property_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.float    "rental_fee"
+    t.integer  "sq_ft"
+    t.integer  "bdrms"
+    t.integer  "baths"
+    t.integer  "fl_lvl"
+    t.boolean  "garage_strg"
+    t.index ["property_id"], name: "index_units_on_property_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -46,6 +64,17 @@ ActiveRecord::Schema.define(version: 20170519180605) do
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "email"
+    t.integer  "unit_id"
+  end
+
+  create_table "workspace_property_owners", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "workspace_tenant_workspaces", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

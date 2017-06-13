@@ -1,0 +1,9 @@
+
+<% content_for :title do %>
+	<h1><%= @set_user.first_name %> <%= @set_user.last_name %></h1>
+	<ul class="nav nav-pills">
+	  <li class="active"><a href="#">Home</a></li>
+	  <li><a href="#">Service Request</a></li>
+	</ul>
+<% end %>
+<%= render "workspace/show_tenant_workspace" %>

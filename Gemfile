@@ -39,6 +39,7 @@ gem 'autoprefixer-rails'
 gem "table_print"
 gem "bcrypt", :require => "bcrypt"
 gem 'pry-rails'
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

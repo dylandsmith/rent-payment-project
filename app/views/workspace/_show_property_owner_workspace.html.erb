@@ -1,0 +1,19 @@
+<h1> This is the Property Owner workspace </h1>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Units</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @properties.each do |property| %>
+		<tr class="success">
+			<td><%= property.title %></td><td><%= property.st_add %></td>
+			<% property.units.each do |unit| %>
+				<td><%= unit.address2 %></td>
+			<% end %>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

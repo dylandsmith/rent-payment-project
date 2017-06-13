@@ -64,7 +64,7 @@ class PropertyOwnersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property_owner
-      @property_owner = PropertyOwner.find(params[:id])
+      @property_owner = PropertyOwner.find(session[:user_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
