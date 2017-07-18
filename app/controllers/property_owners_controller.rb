@@ -10,6 +10,9 @@ class PropertyOwnersController < ApplicationController
   # GET /property_owners/1
   # GET /property_owners/1.json
   def show
+    @user = User.new
+    @data = @property_owner.get_data_structure
+    @property = Property.new
   end
 
   # GET /property_owners/new

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
    has_many :properties, as: :utilizes
+   has_many :maintanence_services
    belongs_to :unit
    scope :property_owners, -> { where(type: 'PropertyOwner') }
    scope :tenants, -> { where(type: 'Tenant') }

@@ -1,0 +1,79 @@
+<style>
+.left-container
+{
+	float: left;
+	width: 48%;
+}
+
+.right-container
+{
+	float: right;
+	width: 48%;
+}
+
+.width-control
+{
+	width: 100px;
+}
+</style>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Add New Property</h3>
+	</div>
+	<div class="panel-body">
+		<div class="container left-container">
+			<%= form_for @property do |f|%>
+			<div class="row">
+				<div class="col-md-12">
+	        		<%= f.label :title %><br />
+	        		<%= f.text_field :title, :class => 'form-control' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+	        		<%= f.label :st_add, "Street Address" %><br />
+	        		<%= f.text_field :st_add, :class => 'form-control' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+	        		<%= f.label :city %><br />
+	        		<%= f.text_field :city, :class => 'form-control' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+	        		<%= f.label :state %><br />
+	        		<%= f.text_field :state, :class => 'form-control' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+	        		<%= f.label :zip %><br />
+	        		<%= f.text_field :zip, :class => 'form-control' %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<%= f.submit "Add New Property", :class => 'btn btn-default' %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<div class="container right-container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="input-group">
+						<%= text_field_tag "Unit", nil, placeholder: "Unit #", class: 'form-control' %>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-plus" aria-hidden="true"></i>
+							</button>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>

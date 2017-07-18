@@ -1,0 +1,24 @@
+<h1>I need maintanence!</h1>
+<%= form_for @maintanence_service, url: tenants_maintanence_services_path do |ms| %>	
+	<p>
+        <%= ms.label :location %><br />
+        <%= ms.text_field :location, :class => 'form-control' %>
+      </p>
+      <p>
+        <%= ms.label :maintanence_type %><br />
+        <%= ms.text_field :maintanence_type, class: 'form-control' %>
+      </p>
+      <p>
+        <%= ms.label :desc, "Description" %><br />
+        <%= ms.text_field :desc, class: 'form-control' %>
+      </p>
+      <p>
+        <%= ms.label :time %>
+        <%= ms.text_field :time, {:class => 'form-control'} %>
+      </p>
+       <p>
+        <%= ms.label :emergency, "Emergency" %>
+        <%= ms.check_box :emergency, {:class => 'form-control'} %>
+      </p>
+     <p class="button"><%= ms.submit "Create Service Request", :class => 'btn btn-default' %></p>
+<% end %>

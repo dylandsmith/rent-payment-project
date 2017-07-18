@@ -1,0 +1,53 @@
+   <div class="form-group">
+    <%= form_for @user do |f| %>
+      <% if @user.errors.any? %>
+        <div class="error_messages">
+          <h2>Form is invalid</h2>
+          <ul>
+            <% for message in @user.errors.full_messages %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+		  <div class="row">
+			  <div class="col-md-6">
+		        <%= f.label :first_name %><br />
+		        <%= f.text_field :first_name, :class => 'form-control' %>
+			  </div>
+			  <div class="col-md-6">
+		        <%= f.label :last_name %><br />
+		        <%= f.text_field :last_name, :class => 'form-control' %>
+			  </div>
+		  </div>
+		  
+		  <div class="row">
+			  <div class="col-md-12">
+		          <%= f.label :email %><br />
+		          <%= f.text_field :email, :class => 'form-control' %>
+			  </div>
+		  </div>
+		  
+		  <div class="row">
+			  <div class="col-md-6">
+        		  <%= f.label :password %><br />
+        		  <%= f.password_field :password, class: 'form-control' %>
+			  </div>
+			  <div class="col-md-6">
+        		  <%= f.label :password_confirmation %><br />
+        		  <%= f.password_field :password_confirmation, class: 'form-control' %>
+			  </div>
+		  </div>
+       <div class="row">
+		   <div class="col-md-4">
+			   <%= f.label :unit_id %><br />
+			   <%= select_tag "Unit", 
+			   options_from_collection_for_select(@data[0][:units], "id", "address2"), 
+			   class: 'form-control'%>
+			   </div>
+			   <div class="col-md-8">
+				   <%= f.submit "Add New Tenant", :class => 'btn btn-default' %>
+			   </div>
+      </div>
+    <% end %>
+   </div>

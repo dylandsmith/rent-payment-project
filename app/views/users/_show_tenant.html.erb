@@ -2,8 +2,17 @@
 <% content_for :title do %>
 	<h1><%= @set_user.first_name %> <%= @set_user.last_name %></h1>
 	<ul class="nav nav-pills">
-	  <li class="active"><a href="#">Home</a></li>
-	  <li><a href="#">Service Request</a></li>
+	  <li class="active"><a data-toggle="tab" href="#secA">Home</a></li>
+	  <li><a data-toggle="tab" href="#secB">Service Request</a></li>
 	</ul>
 <% end %>
-<%= render "workspace/show_tenant_workspace" %>
+
+<div class="tab-content">
+	<div id="secA" class="tab-pane fade in active">
+		<%= render "workspace/show_tenant_workspace" %>
+	</div>
+	
+	<div id="secB" class="tabe-pane fade">
+		<%= render "workspace/show_maintenance_req" %>
+	</div>
+</div>

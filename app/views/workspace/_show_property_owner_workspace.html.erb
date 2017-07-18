@@ -1,19 +1,47 @@
-<h1> This is the Property Owner workspace </h1>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Title</th>
-			<th>Units</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @properties.each do |property| %>
-		<tr class="success">
-			<td><%= property.title %></td><td><%= property.st_add %></td>
-			<% property.units.each do |unit| %>
-				<td><%= unit.address2 %></td>
-			<% end %>
-		</tr>
-		<% end %>
-	</tbody>
-</table>
+<style>
+	.left-content
+	{
+		float: left;
+		height: 300px;
+		width: 75%;
+		background-color: #eff5f5;
+	}
+	
+	.right-content
+	{
+		float: right;
+		height: 300px;
+		width: 25%;
+	}
+	
+	.boxes
+	{
+		float: left;
+		width: 125px;
+		height: 125px;
+		background-color: #eff5f5;
+		margin: 5px;
+	}
+</style>
+
+<% @properties.each do |property| %>
+<div class="primary panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<%= property.title %>
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="left-content">
+			
+		</div>
+		<div class="right-content">
+			<div class="boxes"></div>
+			<div class="boxes"></div>
+			<div class="boxes"></div>
+			<div class="boxes"></div>
+		</div>
+		<div style="clear: both;"></div>
+	</div>
+</div>
+<% end %>
