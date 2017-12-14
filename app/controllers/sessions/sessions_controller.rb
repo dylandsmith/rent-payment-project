@@ -12,9 +12,9 @@ class Sessions::SessionsController < ApplicationController
       session[:user_type] = user.type
       session[:user_id] = user.id
       if user.type == "PropertyOwner"
-        redirect_to property_owner_path(user.type), :notice => "Property Owner logged in"
+        redirect_to property_owner_path(user), :notice => "Property Owner logged in"
       elsif
-        redirect_to tenant_path(user.type), :notice => "Tenant has logged in"
+        redirect_to tenant_path(user), :notice => "Tenant has logged in"
       end
     else
       flash.now.alert = "Invalid email or password"

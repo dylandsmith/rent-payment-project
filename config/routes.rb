@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get 'maintanence_service/show'
 
   get 'workspace/index'
+  
+  post 'property_owners/test'
 
   root "sessions/sessions#index"
   namespace :sessions do

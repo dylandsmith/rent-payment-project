@@ -1,6 +1,6 @@
 class Unit < ApplicationRecord
   belongs_to :property
-  has_many :users
+  has_many :tenants
   has_many :maintanence_services
   has_one :delinquency
   

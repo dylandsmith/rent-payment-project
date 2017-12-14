@@ -1,4 +1,5 @@
 class PropertyOwner < User
+  has_many :properties, as: :utilizes
   
   def get_data_structure
     @data_struct = []
@@ -32,4 +33,5 @@ class PropertyOwner < User
   def get_delinquencies
     @delinquencies = Delinquency.all
   end
+  
 end

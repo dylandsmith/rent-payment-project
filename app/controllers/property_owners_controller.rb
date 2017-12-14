@@ -13,6 +13,7 @@ class PropertyOwnersController < ApplicationController
     @user = User.new
     @data = @property_owner.get_data_structure
     @property = Property.new
+    @units = Array.new{Unit.new}
   end
 
   # GET /property_owners/new
@@ -38,6 +39,18 @@ class PropertyOwnersController < ApplicationController
         format.json { render json: @property_owner.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def test
+    @tenant = Tenant.new(user_params)
+#      @tenant.unit_id = params[:Unit]
+#      @tenant.type = "Tenant"
+
+      if @tenant.save
+         redirect_to property_owner_path(@user.type = "PropertyOwner"), :notice => "Signed up!"
+      else
+         redirect_to property_owner_path(@user.type = "PropertyOwner"), :notice => "Error Occured"
+      end
   end
 
   # PATCH/PUT /property_owners/1
@@ -67,11 +80,15 @@ class PropertyOwnersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_property_owner
-      @property_owner = PropertyOwner.find(session[:user_id])
+      @property_owner = PropertyOwner.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_owner_params
       params.require(:property_owner).permit(:first_name, :last_name, :owner_address, :owner_phone, :number_of_properties)
+    end
+    
+    def user_params
+      params.require(:tenant).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation, :unit_id)
     end
 end

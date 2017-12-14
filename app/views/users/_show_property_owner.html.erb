@@ -1,4 +1,112 @@
 <% content_for :title do %>
-	<h1><%= @set_user.first_name %> <%= @set_user.last_name %></h2>
+	<h1><%= @property_owner.first_name %> <%= @property_owner.last_name %></h2>
+		<ul class="nav nav-pills">
+		  <li class="active"><a data-toggle="tab" href="#secA">Home</a></li>
+		  <li><a data-toggle="tab" href="#secB">Add New Property</a></li>
+		</ul>
 <% end %>
-<%= render "workspace/show_property_owner_workspace" %>
+
+<style>
+	.left-content
+	{
+		float: left;
+		height: 300px;
+		width: 75%;
+		background-color: #eff5f5;
+	}
+	
+	.right-content
+	{
+		float: right;
+		height: 300px;
+		width: 25%;
+	}
+	
+	.boxes
+	{
+		float: left;
+		width: 125px;
+		height: 125px;
+		background-color: #eff5f5;
+		margin: 5px;
+		line-height: 10;
+		text-align: center;
+	}
+</style>
+
+<div class="tab-content">
+	<div id="secA" class="tab-pane fade in active">
+		<% @data.each do |data| %>
+		<div class="primary panel-primary">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<%= data[:title] %>
+				</h3>
+				<span>Delinquencies: </span><%= data[:delinquencies].count%>
+				<span>Maintenance Issues: </span><%= data[:issues].count%>
+			</div>
+			<div class="panel-body">
+				<div class="left-content">
+			
+				</div>
+				<div class="right-content">
+						<div class="boxes">
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-usd fa-3x" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="boxes">
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#newTenant">
+								<i class="fa fa-users fa-3x" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="boxes">
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-wrench fa-3x" aria-hidden="true"></i>
+							</button>
+						</div>
+						<div class="boxes">
+							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">
+								<i class="fa fa-gavel fa-3x" aria-hidden="true"></i>
+							</button>
+						</div>
+				</div>
+				<div style="clear: both;"></div>
+			</div>
+		</div>
+		<% end %>
+	</div>
+	
+	<div id="secB" class="tabe-pane fade">
+		<%= render "properties/new" %>
+	</div>
+</div>
+
+
+
+<!-- Modals -->
+
+<!-- Add new tenant modal -->
+<div id="newTenant" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Add New Tenant</h4>
+      </div>
+      <div class="modal-body">
+        <%= render 'users/new' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+

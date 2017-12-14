@@ -13,24 +13,25 @@ class UsersController < ApplicationController
    end
 
    def create
-      @user = User.new(user_params)
-      @user.unit_id = params[:Unit]
-      @user.type = "Tenant"
-      if @user.save
-         redirect_to property_owner_path(@user.type = "PropertyOwner"), :notice => "Signed up!"
-      else
-         render "new"
-      end
+     @user = User.new(user_params)
+#     @user.type = "PropertyOwner"
+     if @user.save
+       redirect_to property_owner_path(@user), :notice => "Signed up!"
+     else
+       render "new"
+     end
    end
 
    def show
      @maintanence_service = MaintanenceService.new
+     
      @units = []
       if @set_user.type == "PropertyOwner"
-         @properties = @set_user.properties
-         @set_user.properties.each do |property|
-           @units.push(property.units)      
-         end
+        @property_owner = set_property_owner
+        @user = User.new
+        @data = @property_owner.get_data_structure
+        @property = Property.new
+        @units = Array.new{Unit.new}
       else
          @unit = @set_user.unit
          @property = @unit.property
@@ -40,11 +41,20 @@ class UsersController < ApplicationController
    private
 
    def set_user
-      @set_user = User.find(session[:user_id])
+      binding.pry
+      if(session[:user_id] != nil)
+        @set_user = User.find(session[:user_id])
+      else
+        @set_user = User.find(params[:id])
+      end
    end
-
+   
+   def set_property_owner
+     PropertyOwner.find(params[:id])
+   end
+   
    def user_params
-      params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :unit_id)
+      params.require(:user).permit(:first_name, :last_name, :phone, :email, :password, :password_confirmation, :type)
    end
 
 end
