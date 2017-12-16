@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170706183845) do
+ActiveRecord::Schema.define(version: 20171209195426) do
 
   create_table "delinquencies", force: :cascade do |t|
     t.integer  "amount"
@@ -35,16 +35,19 @@ ActiveRecord::Schema.define(version: 20170706183845) do
 
   create_table "properties", force: :cascade do |t|
     t.string   "title"
-    t.string   "utilizes_type"
-    t.integer  "utilizes_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "st_add"
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.index ["utilizes_type", "utilizes_id"], name: "index_properties_on_utilizes_type_and_utilizes_id"
-    t.index [nil], name: "index_properties_on_utilizing_property_id"
+  end
+
+  create_table "properties_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "property_id"
+    t.index ["property_id"], name: "index_properties_users_on_property_id"
+    t.index ["user_id"], name: "index_properties_users_on_user_id"
   end
 
   create_table "property_owner_workspaces", force: :cascade do |t|
@@ -71,6 +74,13 @@ ActiveRecord::Schema.define(version: 20170706183845) do
     t.index ["property_id"], name: "index_units_on_property_id"
   end
 
+  create_table "units_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "unit_id"
+    t.index ["unit_id"], name: "index_units_users_on_unit_id"
+    t.index ["user_id"], name: "index_units_users_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -79,13 +89,12 @@ ActiveRecord::Schema.define(version: 20170706183845) do
     t.string   "state"
     t.string   "country"
     t.string   "phone"
-    t.string   "type"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.string   "user_designation"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "password_hash"
     t.string   "password_salt"
     t.string   "email"
-    t.integer  "unit_id"
   end
 
   create_table "workspace_property_owners", force: :cascade do |t|

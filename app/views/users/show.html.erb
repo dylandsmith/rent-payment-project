@@ -1,5 +1,5 @@
 
-<% if @set_user.type == 'PropertyOwner' %>
+<% if @set_user.user_designation == 'PropertyOwner' %>
 	<%= render 'show_property_owner' %>
 <% else %>
 	<%= render 'show_tenant' %>

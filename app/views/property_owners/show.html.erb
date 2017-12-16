@@ -1,4 +1,4 @@
-
+<% binding.pry %>
 <% content_for :title do %>
 	<h1><%= @property_owner.first_name %> <%= @property_owner.last_name %></h2>
 		<ul class="nav nav-pills">
@@ -98,7 +98,7 @@
         <h4 class="modal-title">Add New Tenant</h4>
       </div>
       <div class="modal-body">
-        <%= render 'users/new' %>
+        <%#= render 'users/new' %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

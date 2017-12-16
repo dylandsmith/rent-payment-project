@@ -1,40 +1,60 @@
 <% content_for :title do %>
-  <h2>Create New User</h2>
+  <h2>Create Your New Account</h2>
 <% end %>
-   <div class="form-group">
-    <%= form_for @user do |f| %>
-      <% if @user.errors.any? %>
-        <div class="error_messages">
-          <h2>Form is invalid</h2>
-          <ul>
-            <% for message in @user.errors.full_messages %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-      <p>
-        <%= f.label :email %><br />
-        <%= f.text_field :email, :class => 'form-control' %>
-      </p>
-      <p>
-        <%= f.label :password %><br />
-        <%= f.password_field :password, class: 'form-control' %>
-      </p>
-      <p>
-        <%= f.label :password_confirmation %><br />
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
-      </p>
-      <p>
-        <%= f.label :type, "Property Owner" %>
-        <%= f.check_box :type, {:class => 'form-control'}, "PropertyOwner", "Tenant" %>
-      </p>
-       <p>
-        <%= f.label :type, "Tenant" %>
-        <%= f.check_box :type, {:class => 'form-control'}, "Tenant", "PropertyOwner" %>
-      </p>
-     <p class="button"><%= f.submit "Create User", :class => 'btn btn-default' %></p>
+<div class="form-group">
+<%= form_for @user do |f| %>
+<div class="row">
+  <div class="col-md-12">
+    <% if @user.errors.any? %>
+      <div class="error_messages">
+        <h2>Form is invalid</h2>
+        <ul>
+          <% for message in @user.errors.full_messages %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-   </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= f.text_field :first_name, placeholder: 'First Name', :class => 'form-control' %>
+  </div>
+  <div class="col-md-6">
+    <%= f.text_field :last_name, placeholder: 'Last Name', :class => 'form-control' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= f.text_field :email, placeholder: 'Email', :class => 'form-control' %>
+  </div>
+  <div class="col-md-6">
+    <%= f.text_field :phone, placeholder: 'Phone', :class => 'form-control' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= f.password_field :password, placeholder: "Password", class: 'form-control' %>
+  </div>
+  <div class="col-md-6">
+    <%= f.password_field :password_confirmation, placeholder: 'Password Confirmation', class: 'form-control' %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <%= f.radio_button :user_designation, 'Tenant' %> Tenant
+  </div>
+  <div class="col-md-6">
+    <%= f.radio_button :user_designation, 'PropertyOwner' %> Property Owner
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <%= f.submit "Create My Account", :class => 'btn btn-default' %>
+  </div>
+</div>
+<% end %>
+</div>
 
 

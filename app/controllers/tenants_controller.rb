@@ -5,7 +5,7 @@ class TenantsController < ApplicationController
 	end
 
 	def show
-
+    @maintanence_service = MaintanenceService.new
 	end
 
 	private

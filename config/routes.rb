@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "new_user_sign_up" => "users#new", :as => "new_user_sign_up"
   get "user_logged_out" => "sessions/sessions#destroy", :as => "user_logged_out"
   get "property_owners/PropertyOwner" => "property_owners#show", :as => "property_owner_workspace"
+  get "tenants/Tenant" => "tenants#show", :as => "tenant_workspace"
 
   resources :properties
   resources :users

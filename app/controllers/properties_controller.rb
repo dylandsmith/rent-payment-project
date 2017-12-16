@@ -26,10 +26,8 @@ class PropertiesController < ApplicationController
   # POST /properties.json
   def create
     @property = Property.new(property_params)
-    @property.utilizes_id = session[:user_id]
-    @property.utilizes_type = "User"
-    
     if @property.save
+      @property.users << User.find(session[:user_id])
       redirect_to property_owner_path(session[:user_type]), :notice => "New Property Added"
     else
       render "new"
