@@ -10,6 +10,12 @@
           </ul>
         </div>
       <% end %>
+      <div class="row">
+        <div class="col-md-12">
+           <%= select_tag "Unit", options_from_collection_for_select(@tenants, "id", "first_name"), 
+         class: 'form-control'%>
+        </div>
+      </div>
 		  <div class="row">
 			  <div class="col-md-6">
 		        <%= f.label :first_name %><br />

@@ -4,18 +4,150 @@
 	float: left;
 	width: 48%;
 }
-
 .right-container
 {
 	float: right;
 	width: 48%;
+	height: 400px;
+	overflow: scroll;
 }
-
 .width-control
 {
 	width: 100px;
 }
+.test {
+	width: 100%;
+}
+.input-group .form-control {
+	width: 50%;
+}
+.nopadding {
+	padding: 0;
+}
 </style>
+<script>
+	function addNewUnit(event) {
+		var unitArray = [];
+		var unitNum;
+		
+		if(event.target.nodeName == "BUTTON" || event.target.nodeName == "I") {
+			if(event.target.nodeName == "I") {
+				unitArray = event.target.parentNode.id.split('-')
+			}
+			else {
+				unitArray = event.target.id.split('-');
+			}
+		
+			unitNum = unitArray[1];
+			
+			if((event.target.nodeName == "BUTTON" || event.target.nodeName == "I") && 
+			document.getElementById('unit-icon-' + unitNum).className == 'fa fa-pencil') {
+					document.getElementById("unitnumber" + unitNum).disabled = false;
+					document.getElementById('unit-icon-' + unitNum).className = 'fa fa-check';
+			}
+			else {
+					if((event.target.nodeName == "BUTTON" || event.target.nodeName == "I") && 
+						document.getElementById('unit-icon-' + unitNum).className == 'fa fa-plus') {
+						var newRowDiv = document.createElement('DIV');
+						newRowDiv.className = 'row';
+		
+						var newDiv1 = createNewUnitTextInput('number', 3, (parseInt(unitNum)) + 1, 'Unit #');
+						var newDiv2 = createNewUnitTextInput('rent', 6, (parseInt(unitNum)) + 1, '$');
+						var newDiv3 = createNewUnitTextInput('area', 3, (parseInt(unitNum)) + 1, 'Area');
+						
+						newRowDiv.appendChild(newDiv1);
+						newRowDiv.appendChild(newDiv2);
+						newRowDiv.appendChild(newDiv3);
+						
+						var newRowDiv2 = document.createElement('DIV');
+						newRowDiv2.className = 'row';
+						
+						var newDiv4 = createNewUnitTextInput('bdrms', 3, (parseInt(unitNum)) + 1, '# Bdrms');
+						var newDiv5 = createNewUnitTextInput('baths', 6, (parseInt(unitNum)) + 1, '# Baths');
+						var newDiv6 = createNewUnitTextInput('fllvl', 3, (parseInt(unitNum)) + 1, 'Floor Level');
+						
+						newRowDiv2.appendChild(newDiv4);
+						newRowDiv2.appendChild(newDiv5);
+						newRowDiv2.appendChild(newDiv6);
+						
+						var newRowDiv3 = document.createElement('DIV');
+						newRowDiv3.className = 'row';
+						
+						var button = document.createElement('BUTTON');
+						button.className = 'btn btn-default';
+						button.type = 'button';
+						button.id = "unit-" + (parseInt(unitNum) + 1);
+		
+						var icon = document.createElement('I');
+						icon.className = 'fa fa-plus';
+						icon.setAttribute('aria-hidden', 'true');
+						icon.id = "unit-icon-" + (parseInt(unitNum) + 1);
+		
+						button.appendChild(icon);
+						newRowDiv3.appendChild(button);
+						var divContainer = document.getElementById('newUnitContainer');
+						divContainer.appendChild(newRowDiv);
+						divContainer.appendChild(newRowDiv2);
+						divContainer.appendChild(newRowDiv3);
+				
+						document.getElementById("unitnumber" + (parseInt(unitNum) + 1)).focus();
+					}
+					document.getElementById('unit-icon-' + unitNum).className = 'fa fa-pencil';
+					document.getElementById('unitnumber' + unitNum).disabled = true;
+				}
+		}
+	}
+	
+	function createNewUnitTextInput(type, size, index, placeholder) {
+		
+		var newColDiv = document.createElement("DIV");
+		newColDiv.className = 'col-md-' + size + ' nopadding';
+		
+		var newInput = document.createElement("INPUT");
+		newInput.className = 'form-control'
+		newInput.type = 'text';
+		newInput.name = 'unit['+ type + 'Info]';
+		newInput.id = 'unit' + type + index;
+		newInput.placeholder = placeholder;
+		
+		newColDiv.appendChild(newInput);
+		
+		return newColDiv;
+	}
+	
+	window.onload = function () {
+		var addUnits = document.getElementById('unitsContainer')
+		addUnits.addEventListener('click', addNewUnit, false);
+	}
+	
+	function lockDownUnits() {
+		var unitArray = [];
+		
+		var inputs = document.getElementsByTagName('INPUT');
+		var unitInfo = {};
+		
+		for(var i=0; i<inputs.length; i++) {
+			if(inputs[i].getAttribute('NAME') == "unit[numberInfo]")
+				unitInfo["unit"] = inputs[i].value;
+			if(inputs[i].getAttribute('NAME') == "unit[rentInfo]")
+				unitInfo["rent"] = inputs[i].value;
+			if(inputs[i].getAttribute('NAME') == "unit[areaInfo]")
+				unitInfo["area"] = inputs[i].value;
+			if(inputs[i].getAttribute('NAME') == "unit[bdrmsInfo]")
+				unitInfo["bdrms"] = inputs[i].value;
+			if(inputs[i].getAttribute('NAME') == "unit[bathsInfo]")
+				unitInfo["baths"] = inputs[i].value;
+			if(inputs[i].getAttribute('NAME') == "unit[fllvlInfo]")
+				unitInfo["fllvl"] = inputs[i].value;
+			
+			if(Object.keys(unitInfo).length == 6) {
+				unitArray.push(unitInfo);
+				unitInfo = {};
+			}
+		}
+		document.getElementById('unitArrayToPass').value = JSON.stringify(unitArray);
+	}
+</script>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<h3 class="panel-title">Add New Property</h3>
@@ -53,27 +185,85 @@
 	        		<%= f.text_field :zip, :class => 'form-control' %>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<%= f.submit "Add New Property", :class => 'btn btn-default' %>
-				</div>
-			</div>
-			<% end %>
 		</div>
-		<div class="container right-container">
-			<div class="row">
-				<div class="col-md-4">
-					<div class="input-group">
-						<%= text_field_tag "Unit", nil, placeholder: "Unit #", class: 'form-control' %>
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">
-								<i class="fa fa-plus" aria-hidden="true"></i>
-							</button>
-						</span>
-					</div>
+		<div id="unitsContainer" class="container right-container">
+			<%= label_tag 'Units' %>
+				<div id="newUnitContainer">
+
+						<div class="row">
+							<div class="col-md-3 nopadding">
+								<input type="text" class="form-control" id="unitnumber1" name="unit[numberInfo]" placeholder="Unit#">
+							</div>
+							<div class="col-md-6 nopadding">
+								<input type="text" class="form-control" id="unitrent1" name="unit[rentInfo]" placeholder="$">
+							</div>
+							<div class="col-md-3 nopadding">
+								<input type="text" class="form-control" id="unitarea1" name="unit[areaInfo]" placeholder="Area">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-3 nopadding">
+								<input type="text" class="form-control" id="unitbdrms1" name="unit[bdrmsInfo]" placeholder="# Bdrms">
+							</div>
+							<div class="col-md-3 nopadding">
+								<input type="text" class="form-control" id="unitbaths1" name="unit[bathsInfo]" placeholder="# Baths">
+							</div>
+							<div class="col-md-6 nopadding">
+								<input type="text" class="form-control" id="unitfllvl1" name="unit[fllvlInfo]" placeholder="Floor Level">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6 nopadding">
+						    
+							</div>
+							<div class="col-md-6 nopadding">
+								<button id="unit-1" class="btn btn-default" type="button">
+									<i id="unit-icon-1" class="fa fa-plus" aria-hidden="true"></i>
+								</button>
+							</div>
+						</div>
+					<!--
+					<div class="col-md-12">
+						<div class="input-group">
+							<div class="container">
+							<div class="row">
+								<div class="col-md-4">
+									<input type="text" class="form-control" id="unittext1" name="units" placeholder="Unit#">
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" placeholder="$">
+								</div>
+								<div class="col-md-4">
+									<input type="text" class="form-control" placeholder="# Bdrms">
+								</div>
+							</div>
+						</div>
+							<span class="input-group-btn">
+								<button id="unit-1" class="btn btn-default" type="button">
+									<i id="unit-icon-1" class="fa fa-plus" aria-hidden="true"></i>
+								</button>
+							</span>
+						</div>
+					</div> -->
 				</div>
+				
+		</div>
+		<div class="row">
+			<div class="col-md-4"></div><div class="col-md-4"></div>
+			<div class="col-md-4">
+				<button id="submitUnits" class="btn btn-default" type="button" onclick="lockDownUnits()">
+					<i class="fa fa-plus" aria-hidden="true">Add Units</i>
+				</button>
+			</div>
+			<%= hidden_field_tag "unitArrayToPass" %>
+			<%= hidden_field_tag "user_id", value: session[:user_id]%>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<%= f.submit "Add New Property", :class => 'btn btn-default' %>
 			</div>
 		</div>
+		<% end %>
 		<div style="clear: both;"></div>
 	</div>
 </div>

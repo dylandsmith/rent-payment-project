@@ -1,0 +1,5 @@
+<h1>Hello Apts</h1>
+<%= form_tag('/get_units') do %>
+  <%= select_tag 'Apts', options_from_collection_for_select(@apts, 'id', 'title') %>
+  <%= submit_tag 'Submit' %>
+<% end %>

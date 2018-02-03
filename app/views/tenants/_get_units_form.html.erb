@@ -1,0 +1,5 @@
+<h1>Hello Units</h1>
+<%= form_tag('/associate_tenant') do %>
+  <%= select_tag 'Units', options_from_collection_for_select(@units, 'id', 'address2') %>
+  <%= submit_tag 'Submit' %>
+<% end %>

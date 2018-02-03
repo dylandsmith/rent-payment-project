@@ -1,0 +1,5 @@
+</h1>Hello Cities</h1>
+<%= form_tag('/get_apts') do %>
+  <%= select_tag 'City', options_for_select(@cities) %>
+  <%= submit_tag 'Submit' %>
+<% end %>

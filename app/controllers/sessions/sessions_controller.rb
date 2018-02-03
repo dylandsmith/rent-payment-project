@@ -9,12 +9,12 @@ class Sessions::SessionsController < ApplicationController
   def create
     user = User.authenticate(params[:email], params[:password])
     if user
-      session[:user_type] = user.type
+      session[:user_type] = user.user_designation
       session[:user_id] = user.id
-      if user.type == "PropertyOwner"
-        redirect_to property_owner_path(user.type), :notice => "Property Owner logged in"
+      if user.user_designation == "PropertyOwner"
+        redirect_to property_owner_path(user.user_designation), :notice => "Property Owner logged in"
       elsif
-        redirect_to tenant_path(user.type), :notice => "Tenant has logged in"
+        redirect_to tenant_path(user.user_designation), :notice => "Tenant has logged in"
       end
     else
       flash.now.alert = "Invalid email or password"

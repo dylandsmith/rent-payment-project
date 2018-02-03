@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    #@user.type = 'PropertyOwner'
     if @user.save
       session[:user_id] = @user.id
       if @user.user_designation == 'PropertyOwner'
@@ -37,7 +36,6 @@ class UsersController < ApplicationController
       end
     else
       @unit = @set_user.units.first
-      # @property = @unit.property
     end
   end
 
@@ -45,7 +43,6 @@ class UsersController < ApplicationController
 
     def set_user
       @set_user = User.find(session[:user_id])
-      binding.pry
     end
 
     def user_params

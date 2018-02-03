@@ -1,4 +1,3 @@
-<% binding.pry %>
 <% content_for :title do %>
 	<h1><%= @property_owner.first_name %> <%= @property_owner.last_name %></h2>
 		<ul class="nav nav-pills">
@@ -48,7 +47,13 @@
 			</div>
 			<div class="panel-body">
 				<div class="left-content">
-			
+					<% if data[:units].present? %>
+						<%= label_tag 'Units' %>
+						<%= select_tag 'Units',
+								options_from_collection_for_select(data[:units],
+								'address2',
+								'address2'), class: 'form-control' %>
+					<% end %>
 				</div>
 				<div class="right-content">
 						<div class="boxes">
@@ -98,7 +103,7 @@
         <h4 class="modal-title">Add New Tenant</h4>
       </div>
       <div class="modal-body">
-        <%#= render 'users/new' %>
+        <%= render 'users/new' %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

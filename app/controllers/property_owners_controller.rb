@@ -10,7 +10,7 @@ class PropertyOwnersController < ApplicationController
   # GET /property_owners/1
   # GET /property_owners/1.json
   def show
-    binding.pry
+    @tenants = Tenant.all.each { |tenant| tenant.units.empty? }
     @user = User.new
     @data = @property_owner.get_data_structure
     @property = Property.new
@@ -73,6 +73,6 @@ class PropertyOwnersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def property_owner_params
-      params.require(:property_owner).permit(:first_name, :last_name, :owner_address, :owner_phone, :number_of_properties)
+      params.require(:property_owner).permit(:first_name, :last_name, :owner_address, :owner_phone, unitArrayToPass: [])
     end
 end

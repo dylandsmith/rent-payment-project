@@ -25,9 +25,23 @@ class PropertiesController < ApplicationController
   # POST /properties
   # POST /properties.json
   def create
+    binding.pry
+    # JSON.parse(params[:unitArrayToPass]) to get the units individually
+    units = JSON.parse(params[:unitArrayToPass]) if params[:unitArrayToPass].present?
     @property = Property.new(property_params)
     if @property.save
       @property.users << User.find(session[:user_id])
+      if units.present?
+        units.each do |unit|
+          Unit.create(address2: unit['unit'], 
+            property_id: @property.id,
+            rental_fee: unit['rent'],
+            sq_ft: unit['area'],
+            bdrms: unit['bdrms'],
+            baths: unit['baths'],
+            fl_lvl: unit['fllvl'])
+        end
+      end
       redirect_to property_owner_path(session[:user_type]), :notice => "New Property Added"
     else
       render "new"

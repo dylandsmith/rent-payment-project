@@ -1,0 +1,5 @@
+<h1>Pick a State</h1>
+<%= form_tag('/get_city') do %>
+  <%= select_tag 'State', options_for_select(@states) %>
+  <%= submit_tag 'Submit' %>
+<% end %>
